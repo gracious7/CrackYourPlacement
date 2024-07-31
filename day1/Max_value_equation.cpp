@@ -56,3 +56,49 @@ public:
 
     }
 };
+
+
+//Explaination
+
+// class Solution {
+// public:
+// // if points are (xi,yi) and (xj,yj)
+// // since vo sorted hai so eq yi+yj-|xi-xj| => yi+yj+xj-xi becus (x2>x1) sorted di hai na
+// // club i and j togather  (yi-xi)+(yj+xj) if we are at j we know xj and yj so we just ned to maximise xi-yi
+// // points[i][1] means yi points[i][0] means xi and we need to check ki xi-xj is <= k so
+// // priority que ch ena da diff padi ty xi pado
+// // x dy hisaaab naal sorted hai na os cheez da gfaeda uthana hai
+
+// // SEEEE.. i means any prev point  j means our curr point jidy ty asi huny hegy a
+
+//     int findMaxValueOfEquation(vector<vector<int>>& points, int k) {
+        
+//         priority_queue<pair<int,int>>p;
+//         // pair main ek to diffrece rahega jo hmy max chiye that is (yi-xi) means pichly kisi point ka diff
+//         // and uska xi bhi rakh lo taki vo curr point ky x ky sath diffrenec calculate kar sakt kyonki
+//         // after all conition bhi chk krni hai ki xj-xi<=k or not
+//         int ans=INT_MIN;
+//         for(int j=0;j<points.size();j++)
+//         {
+//                                 // means x of curr (xj) - x of prev any jo queue ky second mein hai (xi)
+//             while(!p.empty() && (points[j][0]-p.top().second)>k)
+//             p.pop();
+
+//             if(!p.empty()) // means eda dif v <=k hai and ehe hun tk de prev da max (yi-xi hega)
+//             {
+//                 // pher ans update kardo
+//                         // xj +   yj +             (yi-xi) jo ki diff hai and queue ky first mein stored thi
+//                 int sum=points[j][0]+points[j][1]+p.top().first;
+//                 ans= max(ans,sum);
+//             }
+
+
+
+//             p.push({points[j][1]-points[j][0],points[j][0]}); // diff and xi to chhk k vali condition
+            
+//         }
+
+//         return ans;
+
+//     }
+};

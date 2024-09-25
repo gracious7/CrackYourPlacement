@@ -8,8 +8,8 @@ public:
             int x = s[i]-'a';
             dv[x]++;
             v[i] = dv;
-            for(auto dx: dv) cout<<dx<<' ';
-            cout<<endl;
+            // for(auto dx: dv) cout<<dx<<' ';
+            // cout<<endl;
         }       
         int ans = 0;
         for(int i =0;i<n; i++){

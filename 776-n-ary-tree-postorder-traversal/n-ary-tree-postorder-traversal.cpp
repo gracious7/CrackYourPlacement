@@ -4,7 +4,7 @@ class Node {
 public:
     int val;
     vector<Node*> children;
-
+    
     Node() {}
 
     Node(int _val) {
@@ -20,22 +20,30 @@ public:
 
 class Solution {
 public:
-    void f(Node* root , vector<int>&ans){
-        if(root == NULL) return;
 
-        vector<Node*> child = root->children;
-        for(int i = 0; i<child.size(); i++){
+    void f(Node* root, vector<int>& ans){
+        if(root == NULL) return ;
+
+        vector<Node*>child;
+        child = root->children;
+
+       for(int i = 0; i< child.size(); i++){
             f(child[i], ans);
-        }
 
-        ans.push_back(root->val);
+       }
+
+       ans.push_back(root->val);
+
+
 
     }
 
     vector<int> postorder(Node* root) {
-        if(root == NULL) return {} ;
         vector<int>ans;
+        if(root == NULL) return ans;
+        
         f(root, ans);
         return ans;
+
     }
 };

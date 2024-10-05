@@ -15,10 +15,12 @@ public:
     int f(TreeNode* root, int &ans){
         if(root == NULL) return 0;
 
-        int l = f(root->left, ans);
-        int r = f(root->right, ans);
-        ans = max({ans, root->val, root->val+l, root->val+r, root->val+l+r});
-        return max(root->val, root->val + max(l, r));
+        int l = max(0, f(root->left, ans));
+        int r = max(0, f(root->right, ans));
+        
+        ans = max(ans, l+r+root->val);
+
+        return root->val + max(l, r);
 
 
     }

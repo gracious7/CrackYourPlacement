@@ -1,22 +1,29 @@
 class Solution {
 public:
     bool checkInclusion(string s1, string s2) {
-        vector<int>v(26, 0);
-        sort(s1.begin(), s1.end());
+        vector<int>f(26, 0);
+        vector<int>window(26, 0);
+        for(auto x: s1) f[x-'a']++;
+
         int l = s1.size();
-
         int n = s2.size();
-        for(int i = 0;i<=n-l; i++){
-            string ss = s2.substr(i, l);
-            sort(ss.begin(), ss.end());
+        if(l > n)  return false;
 
-            // cout<<s1<<' '<<ss<<endl;
-            if(ss == s1) {
+        for(int i = 0; i<l; i++){
+            window[s2[i]-'a']++;
+        }
+        if(f == window) return true;
 
-                return true;
-            }
+        int i = 0, j = l;
+        while( i<n and j < n and i <= j){
+            window[s2[j]-'a']++;
+            window[s2[i]-'a']--;
+            if(window == f) return true;
+            i++;
+            j++;
         }
         return false;
+
 
     }
 };

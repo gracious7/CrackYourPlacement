@@ -9,11 +9,9 @@ public:
         sort(times.begin(), times.end());
 
         priority_queue<int, vector<int>, greater<int>> availableChairs;
-        for (int i = 0; i < n; ++i) {
-            availableChairs.push(i);
-        }
-
         priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> leaving;
+
+        int nextAvailableChair = 0;
 
         for (auto& time : times) {
             int arrival = time[0];
@@ -25,8 +23,13 @@ public:
                 leaving.pop();
             }
 
-            int assignedChair = availableChairs.top();
-            availableChairs.pop();
+            int assignedChair;
+            if (!availableChairs.empty()) {
+                assignedChair = availableChairs.top();
+                availableChairs.pop();
+            } else {
+                assignedChair = nextAvailableChair++;
+            }
 
             if (friendIndex == targetFriend) {
                 return assignedChair;

@@ -5,13 +5,15 @@ public:
         for(auto i:s){
             if(i=='(' or i=='{' or i=='[') st.push(i); 
             else {
-                if(st.empty()) return false;
+                if(st.empty() == true) return false;
                 else if(st.top()=='(' and i!=')') return false;
                 else if(st.top()=='{' and i!='}') return false;
                 else if (st.top()=='[' and i!=']') return false;
                 st.pop();  
             }
         }
-        return st.empty();  
+        
+        if(st.empty() == true) return true;
+        return false;
     }
 };

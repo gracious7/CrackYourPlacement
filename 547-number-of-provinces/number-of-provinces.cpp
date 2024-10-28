@@ -41,20 +41,16 @@ public:
                 vis[i] = 1;
 
                 while(!q.empty()){
-                    int sz = q.size();
-
-                    for(int i =0;i<sz; i++){
-                        int node = q.front();
-                        q.pop();
-
-                        for(auto x: adj[node]){
-                            if(!vis[x]){
-                                vis[x] = 1;
-                                q.push(x);
-                            }
+                    int node = q.front();
+                    q.pop();
+                    
+                    for(auto x: adj[node]){
+                        if(!vis[x]){
+                            vis[x] = 1;
+                            q.push(x);
                         }
-
                     }
+
                 }
                 //bfs ends
                 cnt++;

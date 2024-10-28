@@ -30,16 +30,35 @@ public:
 
         vector<int>vis(n, 0);
 
-        // queue<int>q;
-        // q.push(0);
-        // vis[0] = 1;
-
         int cnt = 0;//it will count how many times bfs is called
         for(int i = 0; i<n; i++){
 
             if(vis[i] == 0){
-                dfs(i, adj, vis);
+
+                //bfs
+                queue<int>q;
+                q.push(i);
+                vis[i] = 1;
+
+                while(!q.empty()){
+                    int sz = q.size();
+
+                    for(int i =0;i<sz; i++){
+                        int node = q.front();
+                        q.pop();
+
+                        for(auto x: adj[node]){
+                            if(!vis[x]){
+                                vis[x] = 1;
+                                q.push(x);
+                            }
+                        }
+
+                    }
+                }
+                //bfs ends
                 cnt++;
+
             }
 
         }

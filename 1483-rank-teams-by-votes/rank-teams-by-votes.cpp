@@ -1,36 +1,37 @@
+
 class Solution {
 public:
     string rankTeams(vector<string>& votes) {
-        int m = votes[0].size();  // number of teams
-        vector<vector<int>> rank(26, vector<int>(m, 0));  // voting rank count
-        vector<bool> teams(26, false);  // track if a team exists
+        int m = votes[0].size();  // Number of teams
+        map<char, vector<int>> rank_map;  // Map to store rankings for each team
 
-        // Populate ranking data based on votes
+        // Initialize rank map for all teams in the first vote
+        for (char team : votes[0]) {
+            rank_map[team] = vector<int>(m, 0);
+        }
+
+        // Update rankings based on votes
         for (const auto& vote : votes) {
             for (int i = 0; i < m; ++i) {
-                teams[vote[i] - 'A'] = true;
-                rank[vote[i] - 'A'][i]++;
+                rank_map[vote[i]][i]++;
             }
         }
 
-        // Initialize a vector to hold team indices
-        vector<int> ans(26);
-        for (int i = 0; i < 26; ++i) ans[i] = i;
+        // Create a vector of all teams for sorting
+        vector<char> teams(votes[0].begin(), votes[0].end());
 
-        // Sort based on the custom comparison function
-        sort(ans.begin(), ans.end(), [&](int x, int y) {
+        // Sort teams based on the ranking counts and lexicographically if tied
+        sort(teams.begin(), teams.end(), [&](char a, char b) {
             for (int i = 0; i < m; ++i) {
-                if (rank[x][i] != rank[y][i]) return rank[x][i] > rank[y][i];
+                if (rank_map[a][i] != rank_map[b][i]) {
+                    return rank_map[a][i] > rank_map[b][i];
+                }
             }
-            return x < y;  // If tied, sort alphabetically
+            return a < b;  // If tied, sort alphabetically
         });
 
         // Form the result string from sorted teams
-        string result;
-        for (int i = 0; i < 26; ++i) {
-            if (teams[ans[i]]) result += (char)('A' + ans[i]);
-        }
-
+        string result(teams.begin(), teams.end());
         return result;
     }
 };

@@ -10,13 +10,15 @@ public:
         int ans= 0;
         int n = strs.size();
         int nn =strs[0].size();
-        vector<string> st(nn);
         for(int j = 0; j<nn; j++){
-            string s = "";
-            for(int i = 0; i < n; i++){
-                s = s + strs[i][j];
+            bool f = false;
+            for(int i =1; i<n; i++){
+                if(strs[i][j] < strs[i-1][j]) {
+                    f = true;
+                }
+
             }
-            if(!isSorted(s)) ans++;
+            if(f == true) ans++;
         }
         return ans;
     }
